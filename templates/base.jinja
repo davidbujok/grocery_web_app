@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bread % Butter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <h1 class="navbar__header">Bread & Butter</h1>
+            </div>
+                
+            <div class="navbar__links">
+                <h3 class="navbar_text">Add</h3>
+                <ul class="navbar__links__list">
+                    <li class="navbar__links_list_item">User</li>
+                    <li class="navbar__links_list_item">List</li>
+                    <li class="navbar__links_list_item">Item</li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+
+        {% block content %}
+            
+        {% endblock content %}
+
+    </main>
+
+
+    <footer class="footer">
+        <div class="footer__logo">
+    
+        </div>
+        
+        <div class="footer__text">
+
+        </div> 
+    </footer>
+</body>
+</html>
