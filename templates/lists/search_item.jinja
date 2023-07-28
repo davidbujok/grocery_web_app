@@ -2,11 +2,15 @@
 
 {% block content %}
     
-    <p>{{ list.name }} </p>    
+    <p>{{ list.name }}</p>    
         
     <form action="{{ url_for('lists.search_item', id=list.id) }}" method="POST">
         <label for="item"></label>
         <input type="text" name="item" id="item">
         <button>Search</button>
+    </form>
+    <form action="">
+        <p>{{ item.name }} {{ item.price }}</p>
+        <button type="submit" value="{{ item.name}}">Add {{ item.name }}</button>
     </form>
 {% endblock content %}
