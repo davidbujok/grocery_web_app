@@ -1,0 +1,10 @@
+{% extends 'base.jinja' %}
+
+{% block content %}
+
+    {% for list in lists %}
+        <p>{{ list.name }}</p>
+        
+    {% endfor %}
+    
+{% endblock content %}
