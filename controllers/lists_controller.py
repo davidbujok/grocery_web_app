@@ -9,3 +9,8 @@ lists_blueprint = Blueprint('lists', __name__)
 def lists():
     lists = List.query.all()
     return render_template('/lists/lists.jinja', lists=lists) 
+
+@lists_blueprint.route('/lists/<id>')
+def show_list(id):
+    list = List.query.get(id)
+    return render_template('/lists/show_list.jinja', list=list)
