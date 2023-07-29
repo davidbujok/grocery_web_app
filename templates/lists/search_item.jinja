@@ -16,4 +16,11 @@
         <p>{{ item.name }} {{ item.price }}</p>
         <button name="item_name" type="submit" value="{{ item.name}}">Add {{ item.name }}</button>
     </form>
+    <section class="items_list">
+        {% for item in items  %}
+            <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
+                <button class="product" name="item_name" type="submit" value="{{ item.name}}">{{ item.name }} {{ item.price }}</button>
+            </form>
+        {% endfor %}
+    </section>
 {% endblock content %}

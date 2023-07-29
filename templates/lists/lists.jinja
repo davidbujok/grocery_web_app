@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
     {% for list in lists %}
         <p><a href="{{ url_for('lists.show_list', id=list.id) }}">{{ list.name }}</a></p>
         

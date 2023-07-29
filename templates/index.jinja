@@ -4,6 +4,9 @@
 
     <section class="user">
         <div class="user__list">
+        {% for user in users %}
+           <p>{{ user.fullname }}</p> 
+        {% endfor %}
             <h2>Danny Donaldson</h2>
         </div>
 

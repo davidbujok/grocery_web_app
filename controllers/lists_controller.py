@@ -51,7 +51,10 @@ def search_item(id):
                 .where(UserList.user_list_id == id)
                 .order_by(Item.name.asc())
                 )
-    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list)
+    items = db.session.scalars(
+            db.select(Item)
+            )
+    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items)
 
 
 @lists_blueprint.route('/lists/<id>/add', methods=['POST'])
@@ -73,4 +76,7 @@ def add_item(id):
                 db.select(UserList)
                 .where(UserList.user_list_id == id)
                 )
-    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list)
+    items = db.session.scalars(
+            db.select(Item)
+            )
+    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items)

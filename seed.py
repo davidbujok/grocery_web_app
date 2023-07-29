@@ -1,6 +1,7 @@
 from app import db
 from models.item import Item
 from models.list import List 
+from models.user import User
 from models.user_list import UserList
 import click
 
@@ -194,5 +195,22 @@ def seed():
     db.session.add(list_2)
     db.session.add(list_3)
     db.session.add(list_4)
+    
+    list_of_users = [
+    User(fullname="Gerald of Rivia"),
+    User(fullname="Solid Snake"),
+    User(fullname="Lara Croft"),
+    User(fullname="Agent 47"),
+    User(fullname="Kratos"),
+    User(fullname="Joel"),
+    User(fullname="Agent 47"),
+    User(fullname="Nathan Drake"),
+    User(fullname="Duke Nukem"),
+    User(fullname="Niko Bellic")
+    ]
+    for user in list_of_users:
+        db.session.add(user)
+
+    
 
     db.session.commit()
