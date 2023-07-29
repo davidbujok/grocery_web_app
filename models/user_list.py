@@ -1,5 +1,5 @@
 from app import db
-from models.list import List
+from models.list import List 
 from models.item import Item
 class UserList(db.Model):
     
