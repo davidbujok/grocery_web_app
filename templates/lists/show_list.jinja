@@ -12,4 +12,12 @@
         <input type="text" name="item" id="item">
         <button>Search</button>
     </form>
+    <p>pick from the list</p>
+    <section class="items_list">
+        {% for item in items  %}
+            <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
+                <button class="product" name="item_name" type="submit" value="{{ item.name}}">{{ item.name }}</button>
+            </form>
+        {% endfor %}
+    </section>
 {% endblock content %}

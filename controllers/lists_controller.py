@@ -4,6 +4,7 @@ from flask import Blueprint, redirect, render_template, request, url_for
 from models.list import List
 from models.item import Item
 from models.user_list import UserList
+from models.user import User
 lists_blueprint = Blueprint('lists', __name__)
 
 

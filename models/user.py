@@ -4,5 +4,6 @@ class User(db.Model):
 
     __tablename__ = 'users'
 
-    id: db.Mapped[int] = db.mapped_column(primary_key=True)
-    fullname: db.Mapped[str] = db.mapped_column(db.String(30))
+    id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(30))
+    lists = db.relationship('List', backref='user')
