@@ -2,7 +2,6 @@ from app import db
 from models.item import Item
 from models.list import List 
 from models.user import User
-from models.user_list import UserList
 import click
 
 from flask.cli import with_appcontext
@@ -10,8 +9,10 @@ from flask.cli import with_appcontext
 @click.command(name='seed')
 @with_appcontext
 def seed():
+
     Item.query.delete()
     List.query.delete()
+
     list_of_items = [
     Item(name='apple', category='fruits', price=0.39),
     Item(name='banana', category='fruits', price=0.29),
@@ -185,16 +186,6 @@ def seed():
 
     for item in list_of_items:
         db.session.add(item) 
-
-    list_1 = List(name='Grocery', budget=20)
-    list_2 = List(name='Tuesday dinner', budget=15)
-    list_3 = List(name='Big eating', budget=25)
-    list_4 = List(name='Cooking for bunch', budget=45)
-
-    db.session.add(list_1)
-    db.session.add(list_2)
-    db.session.add(list_3)
-    db.session.add(list_4)
     
     list_of_users = [
     User(fullname="Gerald of Rivia"),
@@ -208,9 +199,8 @@ def seed():
     User(fullname="Duke Nukem"),
     User(fullname="Niko Bellic")
     ]
+    
     for user in list_of_users:
         db.session.add(user)
-
-    
 
     db.session.commit()

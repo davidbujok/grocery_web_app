@@ -1,0 +1,10 @@
+{% extends 'base.jinja' %}
+
+{% block content %}
+   <p>Add new user here</p> 
+   <form action="{{ url_for('users.add_user') }}" method="POST">
+        <label for="fullname">Username</label>    
+        <input type="text" name="fullname" id="fullname">
+        <button type="submit">Confirm</button>
+   </form>
+{% endblock content %}

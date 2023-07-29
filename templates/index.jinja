@@ -5,9 +5,8 @@
     <section class="user">
         <div class="user__list">
         {% for user in users %}
-           <p>{{ user.fullname }}</p> 
+           <p><a href="{{ url_for('users.user', name=user.fullname) }}">{{ user.fullname }}</a></p> 
         {% endfor %}
-            <h2>Danny Donaldson</h2>
         </div>
 
     </section>
