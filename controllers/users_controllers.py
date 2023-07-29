@@ -13,6 +13,7 @@ def home():
     users = db.session.scalars(db.select(User))
     return render_template('index.jinja', users=users)
 
+
 @users_blueprint.route('/add/user', methods=['GET', 'POST'])
 def add_user():
     
@@ -22,8 +23,8 @@ def add_user():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('users.home'))
-        
     return render_template('/users/add_user.jinja')
+
     
 @users_blueprint.route('/user/<name>')
 def user(name):
@@ -34,20 +35,16 @@ def user(name):
     lists = db.session.execute(
             db.select(List)
             ).scalars()
-    # user_lists = db.session.scalars(
-    #             db.select(List)
-    #             .where(List.user_id == user_is.id)
-    #             )
-    # user_lists = db.session.query(List).filter_by(user_id=user_is.id).all()
     user_lists = user_is.lists
     return render_template('/users/user.jinja', user=user_is, lists=lists, user_lists=user_lists)
 
 
 @users_blueprint.route('/user/<id>/add_list', methods=['POST', 'GET'])
 def add_list(id):
+
     name = request.form['name']
     budget = request.form['budget']
     new_list = List(name=name, budget=budget, user_id=id)
     db.session.add(new_list)
     db.session.commit()
-    return redirect(url_for('lists.show_list', id=id))
+    return redirect(url_for('lists.show_list', id=new_list.id))
