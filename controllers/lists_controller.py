@@ -31,7 +31,8 @@ def show_list(id):
               .where(UserList.user_list_id == id)
               .order_by(Item.name.asc())
               )
-    return render_template('/lists/show_list.jinja', list=list, items=items, on_list=on_list)
+    categories = Item.return_all_categories()
+    return render_template('/lists/show_list.jinja', list=list, items=items, on_list=on_list, categories=categories)
 
 
 @lists_blueprint.route('/lists/<id>/search', methods=['GET', 'POST'])

@@ -1,0 +1,8 @@
+{% extends 'base.jinja' %}
+
+{% block content %}
+    {% for row in categories %}
+        <p>{{ row.name }}</p>
+        
+    {% endfor %}
+{% endblock content %}

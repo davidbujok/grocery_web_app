@@ -1,0 +1,20 @@
+{% extends 'base.jinja' %}
+
+{% block content %}
+
+    <p>This is the user page</p>
+    <p>{{ user.fullname }}</p>
+    
+    {% for list in user_lists %}
+        <p><a href="{{ url_for('lists.show_list', id=list.id) }}">{{ list.name }}</a></p>
+    {% endfor %}
+    
+    <form action="{{ url_for('users.add_list', id=user.id) }}" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name">
+        <label for="budget">Budget</label>
+        <input type="number" name="budget" id="budget">
+        <button type="submit">Create</button>
+    </form>
+ 
+{% endblock content %}

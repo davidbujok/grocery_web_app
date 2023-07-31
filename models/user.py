@@ -7,3 +7,4 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(30))
     lists = db.relationship('List', backref='user')
+    stores = db.relationship('Store', backref='user')

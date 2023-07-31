@@ -3,6 +3,7 @@ from app import db
 from models.user import User
 from models.item import Item
 from models.list import List 
+from models.store import Store
 from models.user_list import UserList
 
 users_blueprint = Blueprint('users', __name__)
@@ -48,3 +49,13 @@ def add_list(id):
     db.session.add(new_list)
     db.session.commit()
     return redirect(url_for('lists.show_list', id=new_list.id))
+
+
+@users_blueprint.route('/user/<id>/create_layout')
+def create_layout(id):
+    categories = Item.return_all_categories()
+    user_is = db.session.scalar(
+            db.select(User)
+            .where(User.fullname==name)
+            )
+    return render_template('/users/create_layout.jinja', categories=categories, user=user_is)
