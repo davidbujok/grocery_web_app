@@ -8,11 +8,3 @@ class User(db.Model):
     fullname = db.Column(db.String(30))
     lists = db.relationship('List', backref='user')
     stores = db.relationship('Store', backref='user')
-
-    @classmethod
-    def user_id(cls, id):
-        user = db.session.scalar(
-            db.select(User)
-            .where(User.id==id)
-            )
-        return user
