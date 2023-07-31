@@ -4,14 +4,25 @@
     
     <p>{{ list.name }} </p>  
     {% for entry in on_list %}
-        {{ entry.item.name }}        
+        <p>{{ entry.item.name }}</p>
     {% endfor %}
+    <p>cateogries here</p>    
+    {% for category in categories %}
+        <p>{{ category }}</p>
         
+    {% endfor %}
+    {% for row in categories %}
+        <p>{{ row.name }}</p>
+        
+    {% endfor %}
+
+    
     <form action="{{ url_for('lists.search_item', id=list.id) }}" method="POST">
         <label for="item"></label>
         <input type="text" name="item" id="item">
         <button>Search</button>
     </form>
+
     <p>pick from the list</p>
     <section class="items_list">
         {% for item in items  %}
@@ -20,4 +31,5 @@
             </form>
         {% endfor %}
     </section>
+    <p><a href="{{ url_for('users.create_layout', id=user.id) }}">Check this new mega function that you'll love</a></p>
 {% endblock content %}

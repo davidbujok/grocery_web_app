@@ -3,10 +3,11 @@
 {% block content %}
 
     <p>This is the user page</p>
+    <p>{{ user.id }}</p>
     <p>{{ user.fullname }}</p>
     
     {% for list in user_lists %}
-        <p><a href="{{ url_for('lists.show_list', id=list.id) }}">{{ list.name }}</a></p>
+        <p><a href="{{ url_for('lists.show_list', id=list.id, userid=user.id) }}">{{ list.name }}</a></p>
     {% endfor %}
     
     <form action="{{ url_for('users.add_list', id=user.id) }}" method="post">

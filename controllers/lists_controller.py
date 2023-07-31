@@ -16,8 +16,8 @@ def lists():
     return render_template('/lists/lists.jinja', lists=lists) 
 
 
-@lists_blueprint.route('/lists/<id>')
-def show_list(id): 
+@lists_blueprint.route('/lists/<userid>/<id>')
+def show_list(userid, id): 
     list = db.session.scalar(
             db.select(List)
             .where(List.id == id)
@@ -32,7 +32,8 @@ def show_list(id):
               .order_by(Item.name.asc())
               )
     categories = Item.return_all_categories()
-    return render_template('/lists/show_list.jinja', list=list, items=items, on_list=on_list, categories=categories)
+    user = User.user_id(userid)
+    return render_template('/lists/show_list.jinja', list=list, items=items, on_list=on_list, categories=categories, user=user)
 
 
 @lists_blueprint.route('/lists/<id>/search', methods=['GET', 'POST'])

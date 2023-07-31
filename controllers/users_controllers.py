@@ -48,14 +48,18 @@ def add_list(id):
     new_list = List(name=name, budget=budget, user_id=id)
     db.session.add(new_list)
     db.session.commit()
-    return redirect(url_for('lists.show_list', id=new_list.id))
+    user = User.user_id(id)
+    return redirect(url_for('lists.show_list', userid=user.id, id=new_list.id))
 
 
-@users_blueprint.route('/user/<id>/create_layout')
+@users_blueprint.route('/user/<id>/create_layout', methods=['GET', 'POST'])
 def create_layout(id):
+    user = User.user_id(id)
+    if request.method == 'POST':
+        layout = request.form['store']
+        address= request.form['address']
+        new_store = Store(name=layout, address=address, user_id=user.id)
+        db.session.add(new_store)
+        db.session.commit()
     categories = Item.return_all_categories()
-    user_is = db.session.scalar(
-            db.select(User)
-            .where(User.fullname==name)
-            )
-    return render_template('/users/create_layout.jinja', categories=categories, user=user_is)
+    return render_template('/users/create_layout.jinja', categories=categories, user=user)

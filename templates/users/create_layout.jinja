@@ -1,8 +1,18 @@
 {% extends 'base.jinja' %}
 
 {% block content %}
+    <h2>Create new layout</h2>
+    <form action="{{ url_for('users.create_layout', id=user.id ) }}" method="post">
+        <label for="store">Name of the layout</label>
+        <input type="text" name="store" id="store">
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address">
+        <button type="submit">Create layout</button>
+    </form>
+    <form action="{{ url_for('users.create_layout', id=user.id )}}" method="post">
     {% for row in categories %}
-        <p>{{ row.name }}</p>
-        
+        <button class="product" name="category" value="{{ row }}" type="submit">{{ row }}</button>
     {% endfor %}
+    </form>
+    
 {% endblock content %}
