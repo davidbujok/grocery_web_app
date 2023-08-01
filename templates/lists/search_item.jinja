@@ -2,6 +2,12 @@
 
 {% block content %}
     
+    <p>This will be sortation method</p>
+    <select name="sort" id="sort">
+        {% for store in stores %}
+           <option value="{{ store.name }}">{{ store.name }}</option>
+        {% endfor %}
+    </select>
     <p>{{ list.name }}</p>    
     {% for entry in on_list %}
         {{ entry.item.name }}        

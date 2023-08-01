@@ -1,0 +1,13 @@
+{% extends 'base.jinja' %}
+
+{% block content %}
+   <p>this is method sortation website</p> 
+   <p>{{ store.name }}</p>
+   <p>{{ user.fullname }}</p>
+   <form action="{{ url_for('users.create_sort_method', id=user.id) }}" method="post">
+    {% for category in categories %}
+        <button class="product" name="category" value="{{ category.name }}" type="submit">{{ category.name }}</button>
+        <input type="hidden" name="store" value="{{ store.name }}">
+    {% endfor %}
+   </form>
+{% endblock content %}

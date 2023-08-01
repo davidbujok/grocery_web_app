@@ -2,17 +2,31 @@
 
 {% block content %}
     <h2>Create new layout</h2>
-    <form action="{{ url_for('users.create_layout', id=user.id ) }}" method="post">
+    
+    <form action="{{ url_for('users.create_layout', id=user.id) }}" method="POST">
         <label for="store">Name of the layout</label>
         <input type="text" name="store" id="store">
         <label for="address">Address</label>
         <input type="text" name="address" id="address">
         <button type="submit">Create layout</button>
     </form>
+
     <form action="{{ url_for('users.create_layout', id=user.id )}}" method="post">
-    {% for row in categories %}
-        <button class="product" name="category" value="{{ row }}" type="submit">{{ row }}</button>
+    {% for category in categories %}
+        <button class="product" name="category" value="{{ category.name }}" type="submit">{{ category.name }}</button>
     {% endfor %}
+    </form>
+    {% if stores == 'empty' %}
+        <p>You don't have any layouts</p>
+    {% endif %}    
+    <form action="{{ url_for('users.create_sort_method', id=user.id) }}" method="post">
+        <select name="store" id="store">
+        {% for store in stores %}
+            <option value="{{ store.name }}">{{ store.name }}</option>
+        {% endfor %}
+        </select>   
+        <input type="hidden" name="category" value="fruit">
+        <button type="submit">Select the store</button>
     </form>
     
 {% endblock content %}

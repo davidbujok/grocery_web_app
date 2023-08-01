@@ -4,7 +4,10 @@ from flask import Blueprint, redirect, render_template, request, url_for
 from models.list import List
 from models.item import Item
 from models.user_list import UserList
+from models.store import Store
+from models.user_layouts import UserLayouts
 from models.user import User
+from models.category import Category
 lists_blueprint = Blueprint('lists', __name__)
 
 
@@ -31,7 +34,7 @@ def show_list(userid, id):
               .where(UserList.user_list_id == id)
               .order_by(Item.name.asc())
               )
-    categories = Item.return_all_categories()
+    categories = Category.all_categories()
     user = User.user_id(userid)
     return render_template('/lists/show_list.jinja', list=list, items=items, on_list=on_list, categories=categories, user=user)
 
@@ -66,6 +69,10 @@ def add_item(id):
             db.select(List)
             .where(List.id == id)
             )
+    user = db.session.scalar(
+            db.select(User)
+            .where(User.id == list.user_id)
+    )
     item = db.session.scalar(
             db.select(Item)
             .where(Item.name == item_name_form)
@@ -81,4 +88,5 @@ def add_item(id):
     items = db.session.scalars(
             db.select(Item)
             )
-    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items)
+    stores = Store.user_stores(user.id)
+    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items, stores=stores)

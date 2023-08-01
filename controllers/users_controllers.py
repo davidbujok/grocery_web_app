@@ -2,6 +2,8 @@ from flask import Flask, Blueprint, render_template, request, redirect, url_for
 from app import db
 from models.user import User
 from models.item import Item
+from models.user_layouts import UserLayouts
+from models.category import Category
 from models.list import List 
 from models.store import Store
 from models.user_list import UserList
@@ -26,7 +28,7 @@ def add_user():
         return redirect(url_for('users.home'))
     return render_template('/users/add_user.jinja')
 
-    
+
 @users_blueprint.route('/user/<name>')
 def user(name):
     user_is = db.session.scalar(
@@ -55,11 +57,31 @@ def add_list(id):
 @users_blueprint.route('/user/<id>/create_layout', methods=['GET', 'POST'])
 def create_layout(id):
     user = User.user_id(id)
+    categories = Category.all_categories()
+    stores = Store.user_stores(id)
     if request.method == 'POST':
         layout = request.form['store']
         address= request.form['address']
         new_store = Store(name=layout, address=address, user_id=user.id)
         db.session.add(new_store)
         db.session.commit()
-    categories = Item.return_all_categories()
-    return render_template('/users/create_layout.jinja', categories=categories, user=user)
+        return render_template('/users/create_layout.jinja', categories=categories, user=user, stores=stores)
+    # store = 'empty'
+    return render_template('/users/create_layout.jinja', categories=categories, user=user, stores=stores)
+
+@users_blueprint.route('/user/<id>/create_layout/sort', methods=['GET', 'POST'])
+def create_sort_method(id):
+    user = User.user_id(id)
+    store_name = request.form['store']
+    store = db.session.scalar(
+            db.select(Store)
+            .where(Store.name == store_name)
+            )
+    category_name = request.form['category']
+    category = Category.category_id(category_name)
+    new_sort = UserLayouts(user_store_id=store.id, category_id=category.id)
+    db.session.add(new_sort)
+    db.session.commit() 
+    categories = Category.all_categories()
+    return render_template('/users/create_sort_method.jinja', store=store, user=user, categories=categories)
+
