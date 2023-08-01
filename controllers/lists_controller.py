@@ -1,92 +1,59 @@
 from app import db
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, render_template, request 
 from models.list import List
 from models.item import Item
 from models.user_list import UserList
 from models.store import Store
-from models.user_layouts import UserLayouts
 from models.user import User
 from models.category import Category
+
+
 lists_blueprint = Blueprint('lists', __name__)
 
 
 @lists_blueprint.route('/lists')
 def lists():
-    lists = db.session.execute(
-            db.select(List)
-            ).scalars()
+    lists = List.select_all_lists()    
     return render_template('/lists/lists.jinja', lists=lists) 
 
 
-@lists_blueprint.route('/lists/<userid>/<id>')
-def show_list(userid, id): 
-    list = db.session.scalar(
-            db.select(List)
-            .where(List.id == id)
-            )
-    items = db.session.scalars(
-            db.select(Item)
-            )
-    on_list = db.session.scalars(
-              db.select(UserList)
-              .join(Item, UserList.item_list_id == Item.id)
-              .where(UserList.user_list_id == id)
-              .order_by(Item.name.asc())
-              )
-    categories = Category.all_categories()
-    user = User.user_id(userid)
-    return render_template('/lists/show_list.jinja', list=list, items=items, on_list=on_list, categories=categories, user=user)
+@lists_blueprint.route('/lists/<user_id>/<list_id>')
+def show_list(user_id, list_id): 
+
+    items = Item.select_all_items()
+    categories = Category.select_all_categories()
+    list = List.select_the_list(list_id)
+    on_list = UserList.select_items_on_the_list(list.id)
+    user = User.select_user_by_id(user_id)
+
+    return render_template('/lists/show_list.jinja', items=items, categories=categories, list=list, on_list=on_list, user=user)
 
 
-@lists_blueprint.route('/lists/<id>/search', methods=['GET', 'POST'])
-def search_item(id):
-    item_name_form = request.form['item']
-    list = db.session.scalar(
-            db.select(List)
-            .where(List.id == id)
-            )
-    item = db.session.scalar(
-            db.select(Item)
-            .where(Item.name == item_name_form)
-            )
-    on_list = db.session.scalars(
-                db.select(UserList)
-                .join(Item, UserList.item_list_id == Item.id)
-                .where(UserList.user_list_id == id)
-                .order_by(Item.name.asc())
-                )
-    items = db.session.scalars(
-            db.select(Item)
-            )
+@lists_blueprint.route('/lists/<list_id>/search', methods=['GET', 'POST'])
+def search_item(list_id):
+
+    item_name = request.form['item']
+    list = List.select_the_list(list_id)
+    item = Item.select_search_item(item_name)
+    on_list = UserList.select_items_on_the_list(list.id)
+    items = Item.select_all_items()
+
     return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items)
 
 
 @lists_blueprint.route('/lists/<id>/add', methods=['POST'])
 def add_item(id):
-    item_name_form = request.form['item_name']
-    list = db.session.scalar(
-            db.select(List)
-            .where(List.id == id)
-            )
-    user = db.session.scalar(
-            db.select(User)
-            .where(User.id == list.user_id)
-    )
-    item = db.session.scalar(
-            db.select(Item)
-            .where(Item.name == item_name_form)
-            )
+
+    item_name = request.form['item_name']
+    item = Item.select_search_item(item_name)
+    items = Item.select_all_items()
+    list = List.select_the_list(id)
+    on_list = UserList.select_items_on_the_list(list.id)    
+    user = User.match_user_with_list(list.id)
+    stores = Store.select_user_stores(user.id)
     user_list = UserList(user_list_id = list.id, item_list_id=item.id)
     db.session.add(user_list)
     db.session.commit()
 
-    on_list = db.session.scalars(
-                db.select(UserList)
-                .where(UserList.user_list_id == id)
-                )
-    items = db.session.scalars(
-            db.select(Item)
-            )
-    stores = Store.user_stores(user.id)
     return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items, stores=stores)

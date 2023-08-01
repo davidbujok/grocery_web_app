@@ -1,6 +1,4 @@
 from app import db
-from models.store import Store
-from models.user import User
 
 class UserLayouts(db.Model):
 
@@ -10,13 +8,8 @@ class UserLayouts(db.Model):
     user_store_id = db.Column(db.Integer, db.ForeignKey('stores.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
-
-    # @classmethod
-    # def user_layouts(cls, user_id):
-    #     layouts = db.session.scalars(
-    #                 db.select(cls)
-    #                 .join(Store, cls.user_store_id == Store.id)
-    #                 .join(User, Store.user_id == user_id)
-    #                 .where(Store.user_id == user_id)
-    #                 )
-    #     return layouts
+    @classmethod
+    def create_new_layout(cls, store_id, category_id):
+        new_layout = UserLayouts(user_store_id = store_id, category_id = category_id)
+        db.session.add(new_layout)
+        db.session.commit()

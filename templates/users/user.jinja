@@ -7,15 +7,23 @@
     <p>{{ user.fullname }}</p>
     
     {% for list in user_lists %}
-        <p><a href="{{ url_for('lists.show_list', id=list.id, userid=user.id) }}">{{ list.name }}</a></p>
+        <p><a href="{{ url_for('lists.show_list', list_id=list.id, user_id=user.id) }}">{{ list.name }}</a></p>
+        <form action="{{ url_for('users.delete_list', user_id=user.id, list_id=list.id) }}" method="POST">
+        <button type="submit">Delete {{ list.name }}</button>
+        </form>
+ 
     {% endfor %}
     
-    <form action="{{ url_for('users.add_list', id=user.id) }}" method="post">
+    <form action="{{ url_for('users.add_list', user_id=user.id) }}" method="POST">
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
         <label for="budget">Budget</label>
         <input type="number" name="budget" id="budget">
         <button type="submit">Create</button>
     </form>
+    <form action="{{ url_for('users.delete_user', user_id=user.id) }}" method="post">
+        <button type="submit">Delete</button>
+    </form>
  
 {% endblock content %}
+ 

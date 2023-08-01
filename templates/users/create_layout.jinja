@@ -3,7 +3,7 @@
 {% block content %}
     <h2>Create new layout</h2>
     
-    <form action="{{ url_for('users.create_layout', id=user.id) }}" method="POST">
+    <form action="{{ url_for('users.create_layout', user_id=user.id) }}" method="POST">
         <label for="store">Name of the layout</label>
         <input type="text" name="store" id="store">
         <label for="address">Address</label>
@@ -11,7 +11,7 @@
         <button type="submit">Create layout</button>
     </form>
 
-    <form action="{{ url_for('users.create_layout', id=user.id )}}" method="post">
+    <form action="{{ url_for('users.create_layout', user_id=user.id )}}" method="post">
     {% for category in categories %}
         <button class="product" name="category" value="{{ category.name }}" type="submit">{{ category.name }}</button>
     {% endfor %}
@@ -19,7 +19,7 @@
     {% if stores == 'empty' %}
         <p>You don't have any layouts</p>
     {% endif %}    
-    <form action="{{ url_for('users.create_sort_method', id=user.id) }}" method="post">
+    <form action="{{ url_for('users.create_sort_method', user_id=user.id) }}" method="post">
         <select name="store" id="store">
         {% for store in stores %}
             <option value="{{ store.name }}">{{ store.name }}</option>

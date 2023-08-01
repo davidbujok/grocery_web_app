@@ -10,4 +10,17 @@ class Item(db.Model):
     price = db.Column(db.Float)
     user_list = db.relationship('UserList', backref='item') 
 
-
+    @classmethod
+    def select_all_items(cls):
+        item = db.session.scalars(
+                db.select(cls)
+                )
+        return item
+ 
+    @classmethod
+    def select_search_item(cls, item_name):
+        item = db.session.scalar(
+            db.select(cls)
+            .where(cls.name == item_name)
+            )
+        return item

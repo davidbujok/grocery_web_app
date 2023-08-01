@@ -8,13 +8,13 @@ class Category(db.Model):
     name = db.Column(db.String(30))
 
     @classmethod
-    def all_categories(cls):
+    def select_all_categories(cls):
         return db.session.scalars(db.select(cls))
 
     @classmethod
-    def category_id(cls, name):
-        category_id = db.session.scalar(
+    def select_category_by_name(cls, category_name):
+        category = db.session.scalar(
                         db.select(cls)
-                        .where(cls.name == name)
+                        .where(cls.name == category_name)
                         )
-        return category_id
+        return category

@@ -17,7 +17,7 @@
     {% endfor %}
 
     
-    <form action="{{ url_for('lists.search_item', id=list.id) }}" method="POST">
+    <form action="{{ url_for('lists.search_item', list_id=list.id) }}" method="POST">
         <label for="item"></label>
         <input type="text" name="item" id="item">
         <button>Search</button>
@@ -31,5 +31,5 @@
             </form>
         {% endfor %}
     </section>
-    <p><a href="{{ url_for('users.create_layout', id=user.id) }}">Check this new mega function that you'll love</a></p>
+    <p><a href="{{ url_for('users.create_layout', user_id=user.id) }}">Check this new mega function that you'll love</a></p>
 {% endblock content %}
