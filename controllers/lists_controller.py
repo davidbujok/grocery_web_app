@@ -35,11 +35,12 @@ def search_item(list_id):
 
     item_name = request.form['item']
     list = List.select_the_list(list_id)
+    user = User.match_user_with_list(list_id) 
     item = Item.select_search_item(item_name)
     on_list = UserList.group_items_on_the_list(list_id)
     items = Item.select_all_items()
 
-    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items)
+    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items, user=user)
 
 
 @lists_blueprint.route('/lists/<id>/add', methods=['POST'])
@@ -52,10 +53,9 @@ def add_item(id):
     UserList.add_new_item_to_the_list(list.id, item.id)
     on_list = UserList.group_items_on_the_list(list.id)
     user = User.match_user_with_list(list.id)
-    print(user.fullname)
 #     stores = Store.select_user_stores(user.id)
 
-    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items)
+    return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items, user=user)
 
     # removed stores=stores from return statement
 
