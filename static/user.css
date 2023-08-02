@@ -1,0 +1,80 @@
+.user__page__section {
+    display: flex;
+    width: 800px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    justify-content: space-between;
+}
+
+.user__page__section__left {
+    display: flex;
+    flex-direction: column;
+}
+
+.user__page__welcome__message {
+    font-size: 2rem;
+    color: #E3A10F;
+}
+/* #E3A10F */
+
+
+.user__page__section__left__list {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+}
+
+.user__page_welcome__message__wrapper {
+    margin-bottom: 75px;
+}
+
+.user__page__welcome__message__subtitle {
+    margin-top: 10px;
+    color: #4d3604;
+}
+
+.user__page__section__list__item {
+    font-size: 1.5rem;
+}
+
+.user__page__section__left__list__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user__page__section__right {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.user__page__section__right__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
+}
+
+.user__page__section__right__text {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.user__page__section__right__input {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.user__page__section__right__delete_user {
+    margin-top: 250px;
+    align-self: flex-end; 
+    display: flex;
+    gap: 20px;
+}
+
+.delete__user__form__text {
+    align-self: center;
+}

@@ -1,0 +1,49 @@
+.main__section {
+    display: flex;
+    width: 1200px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main__section__welcome__message {
+    width: 500px;
+}
+
+/* #BE721B */
+.welcome__message__main__text {
+    font-size: 6rem;
+    color: #925612;
+}
+
+.nhb--color {
+    font-size: 7rem;
+    padding-right: 5px;
+}
+
+.main__section__users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main__section__users__text {
+    color: #E3A10F;
+    font-size: 2rem;
+    align-self: flex-end;
+}
+
+.main__section__user__list {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: end;
+    overflow: scroll;
+    gap: 5px;
+}
+
+.user__list__name {
+    font-size: 1.6rem;
+    color: #4a3406;
+}

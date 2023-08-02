@@ -1,20 +1,147 @@
 * {
-    padding: 10;
-    margin: 10;
+    padding: 0;
+    margin: 0;
     text-decoration: none;
     color: black;
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    list-style-type: none;
 }
 
-.items_list {
+body {
     display: flex;
     flex-direction: column;
-    max-height: 500px;
-    overflow: scroll;
-    border: 1px solid green;
-    max-width: 200px;
+    height: 100vh;
 }
 
-.product {
-    border: 0;
-    background-color: transparent;
+
+.navbar {
+    display: flex;
+    background-color: antiquewhite;
+    justify-content: center;
+}
+
+
+.navbar__logo__area {
+    min-width: 900px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.navbar_logo_area_rect {
+    height: 100%;
+    width: 10px;
+    background-color: #E3A10F;
+}
+
+.navbar_logo_area_rect_wrapper {
+    display: flex;
+    gap: 10px;
+    margin-right: -130px;
+}
+
+.navbar__header__bread {
+    color: #BE721B;
+    font-size: 3rem;
+}
+
+.navbar__header__butter {
+    color:  #F2EB87;
+    background-color: #BE721B;
+    font-size: 3rem;
+}
+
+.navbar__links {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    min-width: 100px;
+    margin-left: -100px;
+}
+
+.navbar__links__text {
+    color: #F2EB87;
+    background-color: #BE721B;
+}
+
+.navbar__links__list {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.navbar__links_list_item {
+    color: #BE721B;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.header {
+    height: 120px;
+}
+
+.main {
+    flex-grow: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    display: flex;
+    height: 100px;
+    background-color: #EBDB93;
+    justify-content: center;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    min-width: 900px;
+}
+
+.footer__section {
+    min-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.footer__message {
+    display: flex;
+    font-size: 1rem;
+    padding: 8px;
+    background-color: #d7c886;
+}
+
+.delete__button {
+    border: none;
+    background-color: #BE721B;
+    color: #fffab6;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+}
+
+.user__input {
+    background-color: #fffab6;
+    border: none;
+    width: 250px;
+    height: 50px;
+    font-size: 1.5rem;
+    color: #704411;
+    padding: 5px;
+}
+
+.create__button {
+    border: none;
+    background-color: #E3A10F;
+    color: #472907;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
 }

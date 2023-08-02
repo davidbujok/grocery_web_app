@@ -1,35 +1,52 @@
 {% extends 'base.jinja' %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='show_list.css') }}">
     
-    <p>{{ list.name }} </p>  
-    {% for entry in on_list %}
-        <p>{{ entry.item.name }}</p>
-    {% endfor %}
-    <p>cateogries here</p>    
+<section class="list__page">
+    <div class="list__page__entries">
+        <h1 class="list__page__list__name">{{ list.name }} </h1>
+        <h3 class="list__page__list__name__subtitle">Items on your list</h3>
+        <div class="list__page__entries__section">
+            {% for key, value in on_list.items() %}
+            <p class="entries__section__entry">{{ key }} {{ value }}</p>
+            {% endfor %}
+        </div>
+        <form action="{{ url_for('users.delete_list', user_id=user.id, list_id=list.id) }}" method="POST">
+            <div class="list__page__delete__button__wrapper">
+                <button class="delete__button" type="submit">Delete</button>
+                <p>{{ list.name }}</p>
+            </div>
+        </form>
+    </div>
+
+    {# <p>cateogries here</p>
     {% for category in categories %}
         <p>{{ category }}</p>
-        
+    
     {% endfor %}
     {% for row in categories %}
         <p>{{ row.name }}</p>
-        
-    {% endfor %}
-
     
-    <form action="{{ url_for('lists.search_item', list_id=list.id) }}" method="POST">
-        <label for="item"></label>
-        <input type="text" name="item" id="item">
-        <button>Search</button>
-    </form>
-
-    <p>pick from the list</p>
-    <section class="items_list">
+    {% endfor %} #}
+    
+    
+    <div class="list__page__add__entries">
+        <form action="{{ url_for('lists.search_item', list_id=list.id) }}" method="POST">
+            <button class="create__button list__page__button">Search</button>
+            <label for="item"></label>
+            <input class="user__input"type="text" name="item" id="item">
+        </form>
+        
+        <p class="list__page__add__entries__text">Click on item to add to the list</p>
+        <section class="list__age__add__entries__form">
         {% for item in items  %}
             <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
-                <button class="product" name="item_name" type="submit" value="{{ item.name}}">{{ item.name }} {{ item.price }}</button>
+                <button class="add__entries__form__item" name="item_name" type="submit" value="{{ item.name}}">{{ item.name }} {{ item.price }}</button>
             </form>
         {% endfor %}
-    </section>
-    <p><a href="{{ url_for('users.create_layout', user_id=user.id) }}">Check this new mega function that you'll love</a></p>
+        </section>
+        <p><a href="{{ url_for('users.create_layout', user_id=user.id) }}">Check this new mega function that you'll love</a></p>
+    </div>
+</section>
 {% endblock content %}

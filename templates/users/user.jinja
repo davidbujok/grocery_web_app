@@ -1,29 +1,49 @@
 {% extends 'base.jinja' %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
 
-    <p>This is the user page</p>
-    <p>{{ user.id }}</p>
-    <p>{{ user.fullname }}</p>
+<section class="user__page__section">
+    <div class="user__page__section__left">
+        <div class="user__page_welcome__message__wrapper">
+            <h1 class="user__page__welcome__message">It's good to see you</h1>
+            <h1 class="user__page__welcome__message user__page__welcom__message__user__name">{{ user.fullname }}</h1>
+            <h3 class="user__page__welcome__message__subtitle">Your lists are here</h3>
+        </div>
+        
+        <div class="user__page__section__left__list__wrapper">
+        {% for list in user_lists %}
+            <div class="user__page__section__left__list">
+                <h1 class="user__page__section__list__item"><a href="{{ url_for('lists.show_list', list_id=list.id, user_id=user.id) }}">{{ list.name }}</a></h1>
+                {# <form action="{{ url_for('users.delete_list', user_id=user.id, list_id=list.id) }}" method="POST">
+                <button class="delete__button" type="submit">Delete<button>
+                </form> #}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
     
-    {% for list in user_lists %}
-        <p><a href="{{ url_for('lists.show_list', list_id=list.id, user_id=user.id) }}">{{ list.name }}</a></p>
-        <form action="{{ url_for('users.delete_list', user_id=user.id, list_id=list.id) }}" method="POST">
-        <button type="submit">Delete {{ list.name }}</button>
+    <div class="user__page__section__right">
+        <h4 class="user__page__section__right__text">Create a new list</h4>
+        <form class="user__page__section__right__form" action="{{ url_for('users.add_list', user_id=user.id) }}" method="POST">
+            <div class="user__page__section__right__input">
+                <label for="name">Name</label>
+                <input class="user__input" type="text" required name="name" id="name">
+            </div>
+            <div class="user__page__section__right__input">
+                <label for="budget">Budget</label>
+                <input class="user__input" required type="number" name="budget" id="budget">
+            </div>
+            <button class="create__button" type="submit">Create</button>
         </form>
- 
-    {% endfor %}
-    
-    <form action="{{ url_for('users.add_list', user_id=user.id) }}" method="POST">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name">
-        <label for="budget">Budget</label>
-        <input type="number" name="budget" id="budget">
-        <button type="submit">Create</button>
-    </form>
-    <form action="{{ url_for('users.delete_user', user_id=user.id) }}" method="post">
-        <button type="submit">Delete</button>
-    </form>
- 
+        <div class="user__page__section__right__delete_user">
+            <p class="delete__user__form__text">Delete your account</p>
+            <form class="delete__user__form" action="{{ url_for('users.delete_user', user_id=user.id) }}" method="post">
+                <button class="delete__button" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</section>
+
 {% endblock content %}
  

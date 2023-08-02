@@ -1,32 +1,47 @@
 {% extends 'base.jinja' %}
 
 {% block content %}
-    
-    <p>This will be sortation method</p>
-    <select name="sort" id="sort">
+<link rel="stylesheet" href="{{ url_for('static', filename='search_item.css') }}">
+<section class="search__page">
+    {# <p>This will be sortation method</p> #}
+    {# <select name="sort" id="sort">
         {% for store in stores %}
-           <option value="{{ store.name }}">{{ store.name }}</option>
+            <option value="{{ store.name }}">{{ store.name }}</option>
         {% endfor %}
-    </select>
-    <p>{{ list.name }}</p>    
-    {% for entry in on_list %}
-        {{ entry.item.name }}        
-    {% endfor %}
-        
-    <form action="{{ url_for('lists.search_item', list_id=list.id) }}" method="POST">
-        <label for="item"></label>
-        <input type="text" name="item" id="item">
-        <button>Search</button>
-    </form>
-    <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
-        <p>{{ item.name }} {{ item.price }}</p>
-        <button name="item_name" type="submit" value="{{ item.name}}">Add {{ item.name }}</button>
-    </form>
-    <section class="items_list">
+    </select> #}
+    <div class="search__page__entries">
+        <h1 class="search__page__list__name">{{ list.name }}</h1>
+        <h3 class="search__page__list__name__subtitle">Items on your list</h3>
+        <div class="search__page__entries__section">
+            {% for key, value in on_list.items() %}
+            <p class="entries__section__entry">{{ key }} {{ value }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="search__page__searched__item">
+        <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
+        <button class="create__button" name="item_name" type="submit" value="{{ item.name}}">Add
+        </button>
+        </form>
+        <h4 class="searched__item__text">{{ item.name }} £{{ item.price }}</h4>
+    </div>
+    <div class="search__page__add__entries">
+        <div class="search__page__search__add">
+            <form action="{{ url_for('lists.search_item', list_id=list.id) }}" method="POST">
+                <button class="create__button search__page__button">Search</button>
+                <label for="item"></label>
+                <input class="user__input"type="text" name="item" id="item">
+            </form>
+        </div>
+        </form>
+        <p class="list__page__add__entries__text">Click on item to add to the list</p>
+        <section class="list__age__add__entries__form">
         {% for item in items  %}
             <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
-                <button class="product" name="item_name" type="submit" value="{{ item.name}}">{{ item.name }} {{ item.price }}</button>
+                <button class="add__entries__form__item" name="item_name" type="submit" value="{{ item.name}}">{{ item.name }} {{ item.price }}</button>
             </form>
         {% endfor %}
-    </section>
+        </section>
+    </div>
+</section>
 {% endblock content %}

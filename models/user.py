@@ -1,4 +1,5 @@
 from app import db
+from models.list import List
 
 class User(db.Model):
 
@@ -28,9 +29,10 @@ class User(db.Model):
     def match_user_with_list(cls, list_id):
         user = db.session.scalar(
                 db.select(cls)
-                .where(cls.id == list_id)
+                .join(List, cls.id == List.user_id)
                 )
         return user
+# fix that for stores variable in add_item > lists blueprint
 
     @classmethod
     def select_user_by_name(cls, name):

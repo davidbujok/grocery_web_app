@@ -1,14 +1,26 @@
 {% extends 'base.jinja' %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+<section class="main__section">
+    <div class="main__section__welcome__message">
+        <h1 class="welcome__message__main__text">
+        Make your shopping smooth like
+        <span class="navbar__header__butter nhb--color">
+            Butter
+        </span>
+        </h1>
 
-    <section class="user">
-        <div class="user__list">
+    </div>
+    <div class="main__section__users">
+        <h2 class="main__section__users__text">Which loaf you're?</h2>
+        <div class="main__section__user__list">
         {% for user in users %}
-           <p><a href="{{ url_for('users.user', name=user.fullname) }}">{{ user.fullname }}</a></p> 
+            <h3 class="user__list__name"><a class="user__list__name" href="{{ url_for('users.user', name=user.fullname) }}">{{ user.fullname }}</a></h3>
         {% endfor %}
         </div>
+    </div>
 
-    </section>
+</section>
     
 {% endblock content %}

@@ -18,3 +18,14 @@ class UserList(db.Model):
                     .order_by(Item.name.asc())
         )
         return on_list
+
+    @classmethod
+    def group_items_on_the_list(cls, list_id):
+        on_list = cls.select_items_on_the_list(list_id)
+        items_grouped = {}
+        for user_list in on_list:
+            if user_list.item.name not in items_grouped.keys():
+                items_grouped[user_list.item.name] = 1
+            else:
+                items_grouped[user_list.item.name] += 1
+        return items_grouped

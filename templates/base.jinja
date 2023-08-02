@@ -9,18 +9,26 @@
 <body>
     <header class="header">
         <nav class="navbar">
-            <div class="navbar__logo">
-                <h1 class="navbar__header"><a href="{{ url_for('users.home') }}">Bread & Butter</a></h1>
+            <div class="navbar__logo__area">
+                <div class="navbar_logo_area_rect_wrapper">
+                {% for i in range(7) %}
+                        <div class="navbar_logo_area_rect"></div>
+                {% endfor %}
+                </div>
+                <div class="navbar__logo_cube">
+                    <h1 class="navbar__header"><a class="navbar__header__bread" href="{{ url_for('users.home') }}">Bread</a></h1>
+                    <h1 class="navbar__header"><a class="navbar__header__butter" href="{{ url_for('users.home') }}">Butter</a></h1>
+                </div>
+                <div class="navbar__links">
+                    <h3 class="navbar__links__text">New</h3>
+                    <ul class="navbar__links__list">
+                        <li class="navbar__links_list_item"><a class="navbar__links_list_item" href="{{ url_for('users.add_user') }}">User</a></li>
+                        <li class="navbar__links_list_item">List</li>
+                        <li class="navbar__links_list_item">Item</li>
+                    </ul>
+                </div>
             </div>
                 
-            <div class="navbar__links">
-                <h3 class="navbar_text">Add</h3>
-                <ul class="navbar__links__list">
-                    <li class="navbar__links_list_item"><a href="{{ url_for('users.add_user') }}">User</a></li>
-                    <li class="navbar__links_list_item">List</li>
-                    <li class="navbar__links_list_item">Item</li>
-                </ul>
-            </div>
         </nav>
     </header>
 
@@ -33,13 +41,14 @@
 
 
     <footer class="footer">
-        <div class="footer__logo">
-    
-        </div>
-        
-        <div class="footer__text">
-
-        </div> 
+        <section class="footer__section">
+            <div class="footer__message">
+                <p>You don't need to like either butter or bread to enjoy this app</p>
+            </div>
+            
+            <div class="footer__text">
+            </div>
+        </section>
     </footer>
 </body>
 </html>
