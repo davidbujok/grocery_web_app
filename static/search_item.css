@@ -43,6 +43,8 @@
 
 .search__page__searched__item {
     display: flex;
+    align-self: center;
+    margin-bottom: 100%;
     flex-direction: column;
     gap: 50px;
     margin-top: 32px;
@@ -103,4 +105,27 @@
     align-self: center;
     font-size: 1.5;
     font-weight: 600;
+}
+
+.search__page__total__value {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.search__page__total__value__amount {
+    font-size: 4rem;
+    align-self: center;
+}
+
+.search__page__total__value__text {
+    font-size: 1.5rem;
+}
+
+.combained__total__value__and__item {
+    text-align: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-self:center;
 }

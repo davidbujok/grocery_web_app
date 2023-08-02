@@ -1,32 +1,39 @@
 {% extends 'base.jinja' %}
 
 {% block content %}
-    <h2>Create new layout</h2>
+<link rel="stylesheet" href="{{ url_for('static', filename='create_layout.css') }}">
+<div class="create__layout">
+    <div class="create__layout__new">
+        <h2>Create new layout</h2>
+        
+        <form class="create__layout__form" action="{{ url_for('users.create_layout', user_id=user.id) }}" method="POST">
+            <label for="store">Name of the layout</label>
+            <input type="text" name="store" id="store">
+            <label for="address">Address</label>
+            <input type="text" name="address" id="address">
+            <button type="submit">Create layout</button>
+        </form>
+    </div>
     
-    <form action="{{ url_for('users.create_layout', user_id=user.id) }}" method="POST">
-        <label for="store">Name of the layout</label>
-        <input type="text" name="store" id="store">
-        <label for="address">Address</label>
-        <input type="text" name="address" id="address">
-        <button type="submit">Create layout</button>
-    </form>
-
-    <form action="{{ url_for('users.create_layout', user_id=user.id )}}" method="post">
-    {% for category in categories %}
-        <button class="product" name="category" value="{{ category.name }}" type="submit">{{ category.name }}</button>
-    {% endfor %}
-    </form>
-    {% if stores == 'empty' %}
-        <p>You don't have any layouts</p>
-    {% endif %}    
-    <form action="{{ url_for('users.create_sort_method', user_id=user.id) }}" method="post">
-        <select name="store" id="store">
-        {% for store in stores %}
-            <option value="{{ store.name }}">{{ store.name }}</option>
+    <div class="create__sortation">
+        {% if stores == 'empty' %}
+            <p>You don't have any layouts</p>
+        {% endif %}
+        <form action="{{ url_for('users.create_sort_method', user_id=user.id) }}" method="post">
+            <select name="store" id="store">
+            {% for store in stores %}
+                <option value="{{ store.name }}">{{ store.name }}</option>
+            <input type="hidden" name="category" value="fruit">
+            {% endfor %}
+            <button type="submit">Select the store</button>
+            </select>
+        </form>
+        <form action="{{ url_for('users.create_layout', user_id=user.id )}}" method="post">
+        {% for category in categories %}
+            <button class="product" name="category" value="{{ category.name }}" type="submit">{{ category.name }}</button>
         {% endfor %}
-        </select>   
-        <input type="hidden" name="category" value="fruit">
-        <button type="submit">Select the store</button>
-    </form>
-    
+        </form>
+    </div>
+</div>
+
 {% endblock content %}

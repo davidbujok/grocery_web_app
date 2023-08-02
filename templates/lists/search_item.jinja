@@ -25,12 +25,18 @@
             {% endfor %}
         </div>
     </div>
-    <div class="search__page__searched__item">
-        <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
-        <button class="create__button" name="item_name" type="submit" value="{{ item.name}}">Add
-        </button>
-        </form>
-        <h4 class="searched__item__text">{{ item.name }} £{{ item.price }}</h4>
+    <div class="combained__total__value__and__item">
+        <div class="search__page__searched__item">
+            <form action="{{ url_for('lists.add_item', id=list.id) }}" method="POST">
+            <button class="create__button" name="item_name" type="submit" value="{{ item.name}}">Add
+            </button>
+            </form>
+            <h4 class="searched__item__text">{{ item.name }} £{{ item.price }}</h4>
+        </div>
+        <div class="search__page__total__value">
+            <h4 class="search__page__total__value__text">Your list costing you:</h4>
+            <p class="search__page__total__value__amount">£{{ total_value_of_items }}</p>
+        </div>
     </div>
     <div class="search__page__add__entries">
         <div class="search__page__search__add">

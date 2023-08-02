@@ -1,0 +1,21 @@
+.create__layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.create__layout__new {
+    display: flex;
+    border: solid 1px red;
+    flex-direction: column;
+}
+
+.create__layout__form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+}
+
+.create__sortation {
+    display: flex;
+    flex-direction: column;
+} 

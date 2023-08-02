@@ -94,3 +94,18 @@
     font-size: 1.5;
     font-weight: 600;
 }
+
+.list__page__total__value {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.list__page__total__value__amount {
+    font-size: 4rem;
+    align-self: center;
+}
+
+.list__page__total__value__text {
+    font-size: 1.5rem;
+}

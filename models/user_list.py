@@ -22,7 +22,7 @@ class UserList(db.Model):
                     .join(Item, cls.item_list_id == Item.id)
                     .where(cls.user_list_id == list_id)
                     .order_by(Item.name.asc())
-        )
+                    )
         return on_list
 
     @classmethod
@@ -42,6 +42,14 @@ class UserList(db.Model):
                             db.select(cls)
                             .where((cls.user_list_id == list_id) &
                             (cls.item_list_id == item_id))
-        )
+                            )
         db.session.delete(entry_to_delete)
         db.session.commit() 
+
+    @classmethod
+    def calculate_value_of_all_items_on_the_list(cls, list_id):
+        on_list = cls.select_items_on_the_list(list_id)
+        total_value_of_items = 0
+        for entry in on_list:
+            total_value_of_items += entry.item.price
+        return total_value_of_items.__round__(2)
