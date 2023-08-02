@@ -35,3 +35,13 @@ class UserList(db.Model):
             else:
                 items_grouped[user_list.item.name] += 1
         return items_grouped
+
+    @classmethod
+    def delete_item_on_the_list(cls, list_id, item_id):
+        entry_to_delete = db.session.scalar(
+                            db.select(cls)
+                            .where((cls.user_list_id == list_id) &
+                            (cls.item_list_id == item_id))
+        )
+        db.session.delete(entry_to_delete)
+        db.session.commit() 

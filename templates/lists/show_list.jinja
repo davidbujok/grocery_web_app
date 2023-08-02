@@ -9,10 +9,15 @@
         <h3 class="list__page__list__name__subtitle">Items on your list</h3>
         <div class="list__page__entries__section">
             {% for key, value in on_list.items() %}
-            <p class="entries__section__entry">{{ key }} {{ value }}</p>
-
+            <form action="{{ url_for('lists.delete_item', list_id=list.id, user_id=user.id) }}" class="entries__section__form" method="post">
+                <div class="list__page__entry__wrapper"> 
+                    <button class="delete__button__from__list" type="submit" value="{{ key }}" name="item_name">{{ key }}</button>
+                    <div class="list__page__entry__line"></div>
+                    <p class="list__page__entry__count">{{ value }}</p>
+                </div>
+            </form>
             {% endfor %}
-        </div>
+        </div> 
         <form action="{{ url_for('users.delete_list', user_id=user.id, list_id=list.id) }}" method="POST">
             <div class="list__page__delete__button__wrapper">
                 <button class="delete__button" type="submit">Delete</button>

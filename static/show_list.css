@@ -14,7 +14,7 @@
 }
 
 .list__page__entries__section {
-    width: 400px;
+    width: 300px;
     margin-top: 20px;
     height: 500px;
     margin-bottom: 50px;
@@ -66,4 +66,31 @@
     gap: 15px;
     align-items: center;
     margin-bottom: 25px;
+}
+
+.list__page__entry__wrapper {
+    margin-bottom: 5px;
+    display: flex;
+    gap: 25px;
+    justify-content: start;
+}
+
+.delete__button__from__list { 
+    border: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    text-align: start;
+}
+
+.list__page__entry__line {
+    align-self: center;
+    height: 1px;
+    background-color: #E3A10F;
+    width: 200px;
+}
+
+.list__page__entry__count {
+    align-self: center;
+    font-size: 1.5;
+    font-weight: 600;
 }

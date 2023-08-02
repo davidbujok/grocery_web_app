@@ -1,6 +1,6 @@
 from app import db
 from flask_sqlalchemy import SQLAlchemy
-from flask import Blueprint, render_template, request 
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.list import List
 from models.item import Item
 from models.user_list import UserList
@@ -58,3 +58,12 @@ def add_item(id):
     return render_template('/lists/search_item.jinja', list=list, item=item, on_list=on_list, items=items)
 
     # removed stores=stores from return statement
+
+@lists_blueprint.route('/lists/<list_id>/<user_id>/delete', methods=['POST'])
+def delete_item(list_id, user_id):
+    item_name = request.form['item_name']
+    print(item_name)
+    item = Item.select_search_item(item_name)
+#     list = List.select_the_list(list_id)
+    UserList.delete_item_on_the_list(list_id, item.id)    
+    return redirect(url_for('lists.show_list', user_id=user_id, list_id=list_id))
