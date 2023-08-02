@@ -10,6 +10,7 @@
         <div class="list__page__entries__section">
             {% for key, value in on_list.items() %}
             <p class="entries__section__entry">{{ key }} {{ value }}</p>
+
             {% endfor %}
         </div>
         <form action="{{ url_for('users.delete_list', user_id=user.id, list_id=list.id) }}" method="POST">

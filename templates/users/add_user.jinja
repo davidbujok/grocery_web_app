@@ -1,10 +1,13 @@
 {% extends 'base.jinja' %}
 
 {% block content %}
-   <p>Add new user here</p> 
-   <form action="{{ url_for('users.add_user') }}" method="POST">
-        <label for="fullname">Username</label>    
-        <input type="text" name="fullname" id="fullname">
-        <button type="submit">Confirm</button>
-   </form>
+<link rel="stylesheet" href="{{ url_for('static', filename='add_user.css') }}">
+   <div class="user__section">
+       <h1 class="user__section__title">Add new user here</h1>
+       <form class="user__section__form" action="{{ url_for('users.add_user') }}" method="POST">
+            <label class="user__section__form__username" for="fullname">Username</label>
+            <input class="user__input user__input--color" type="text" name="fullname" id="fullname">
+            <button type="submit" class="create__button">Confirm</button>
+       </form>
+   </div>
 {% endblock content %}

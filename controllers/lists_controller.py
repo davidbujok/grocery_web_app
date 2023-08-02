@@ -24,7 +24,6 @@ def show_list(user_id, list_id):
     items = Item.select_all_items()
     categories = Category.select_all_categories()
     list = List.select_the_list(list_id)
-#     on_list = UserList.select_items_on_the_list(list.id)
     on_list = UserList.group_items_on_the_list(list_id)
     user = User.select_user_by_id(user_id)
 
@@ -37,7 +36,6 @@ def search_item(list_id):
     item_name = request.form['item']
     list = List.select_the_list(list_id)
     item = Item.select_search_item(item_name)
-#     on_list = UserList.select_items_on_the_list(list.id)
     on_list = UserList.group_items_on_the_list(list_id)
     items = Item.select_all_items()
 
@@ -51,10 +49,7 @@ def add_item(id):
     item = Item.select_search_item(item_name)
     items = Item.select_all_items()
     list = List.select_the_list(id)
-    user_list = UserList(user_list_id = list.id, item_list_id=item.id)
-    db.session.add(user_list)
-    db.session.commit()
-#     on_list = UserList.select_items_on_the_list(list.id)    
+    UserList.add_new_item_to_the_list(list.id, item.id)
     on_list = UserList.group_items_on_the_list(list.id)
     user = User.match_user_with_list(list.id)
     print(user.fullname)

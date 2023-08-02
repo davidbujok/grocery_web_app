@@ -1,0 +1,46 @@
+.item__content__page {
+    display: flex;
+}
+
+.item__section {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 500px;
+    height: 500px;
+    padding: 25px;
+    border: solid 5px #7c490e;
+    border-radius: 80px 80px 5px 5px;
+    background-color: #fffae6;
+}
+
+.item__section__message {
+   font-size: 3rem; 
+   color: #E3A10F;
+   width: 500px;
+   align-self: center;
+}
+
+.item__section__message__subtitle {
+   font-size: 2rem; 
+}
+
+.user__section__form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+.user__section__form__text {
+    margin-top: 15px;
+    font-size: 3rem;
+    color: #7c490e;
+    font-weight: 500;
+}
+
+.user__input--color {
+    background-color: #bc840c;
+    color: #ffe573;
+}

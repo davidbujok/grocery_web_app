@@ -23,8 +23,7 @@
                     <h3 class="navbar__links__text">New</h3>
                     <ul class="navbar__links__list">
                         <li class="navbar__links_list_item"><a class="navbar__links_list_item" href="{{ url_for('users.add_user') }}">User</a></li>
-                        <li class="navbar__links_list_item">List</li>
-                        <li class="navbar__links_list_item">Item</li>
+                        <li class="navbar__links_list_item"><a class="navbar__links_list_item" href="{{ url_for('users.add_new_item_to_database') }}">Item</a></li>
                     </ul>
                 </div>
             </div>
@@ -43,7 +42,7 @@
     <footer class="footer">
         <section class="footer__section">
             <div class="footer__message">
-                <p>You don't need to like either butter or bread to enjoy this app</p>
+                <p>You don't need to like butter or bread to enjoy this app</p>
             </div>
             
             <div class="footer__text">

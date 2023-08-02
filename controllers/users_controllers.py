@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 from app import db
 from models.user import User
+from models.item import Item
 from models.user_layouts import UserLayouts
 from models.category import Category
 from models.list import List 
@@ -81,3 +82,14 @@ def create_sort_method(user_id):
     categories = Category.select_all_categories()
     return render_template('/users/create_sort_method.jinja', store=store, user=user, categories=categories)
 
+@users_blueprint.route('/add_item', methods=['GET', 'POST'])
+def add_new_item_to_database():
+    if request.method == 'POST':
+        item_name = request.form['name']
+        category = request.form['category_id']
+        price = request.form['price']
+        new_item = Item(name=item_name, category=category, price=price)
+        db.session.add(new_item)
+        db.session.commit()
+    categories = Category.select_all_categories()
+    return render_template('/items/add_item.jinja', categories=categories)

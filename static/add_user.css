@@ -1,0 +1,38 @@
+.user__section {
+    margin-top: auto;
+    margin-bottom: auto;
+    border: solid 5px #7c490e;
+    border-radius: 80px 80px 5px 5px;
+    background-color: #fffae6;
+    display: flex;
+    width: 500px;
+    height: 500px;
+    flex-direction: column;
+    gap: 100px;
+    padding: 50px;
+    align-items: center;
+}
+
+.user__section__title {
+    font-size: 3rem;
+    color: #bc840c;
+}
+
+.user__section__form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+}
+
+.user__section__form__username {
+    font-size: 3rem;
+    color: #7c490e;
+    font-weight: 500;
+}
+
+.user__input--color {
+    background-color: #bc840c;
+    color: #ffe573;
+}
+
