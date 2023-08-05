@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for
+from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
 from app import db
 from app.models.user import User
 from app.models.item import Item
@@ -6,6 +6,7 @@ from app.models.user_layouts import UserLayouts
 from app.models.category import Category
 from app.models.list import List 
 from app.models.store import Store
+from app.forms.forms import CreateList, CreateItem
 
 users_blueprint = Blueprint('users', __name__)
 
@@ -39,15 +40,22 @@ def delete_user(user_id):
 def user(name):
     user = User.select_user_by_name(name)
     lists = List.select_all_lists()
-    return render_template('/users/user.jinja', user=user, lists=lists, user_lists=user.lists)
+    form = CreateList()
+    return render_template('/users/user.jinja', user=user, lists=lists, user_lists=user.lists, form=form)
 
 
 @users_blueprint.route('/user/<user_id>/add_list', methods=['POST', 'GET'])
 def add_list(user_id):
-    name = request.form['name']
-    budget = request.form['budget']
-    new_list = List.add_new_list(name, budget, user_id)
-    return redirect(url_for('lists.show_list', user_id=user_id, list_id=new_list.id))
+    user = User.select_user_by_id(user_id)
+    # name = request.form['name']
+    # budget = request.form['budget']
+    form = CreateList()
+    if form.validate_on_submit():
+        new_list = List.add_new_list(form.name.data, form.budget.data, user_id)
+        return redirect(url_for('lists.show_list', user_id=user_id, list_id=new_list.id))
+    return redirect(url_for('users.user', name=user.fullname))
+
+
 
 
 @users_blueprint.route('/delete/<user_id>/list/<list_id>', methods=['POST'])
@@ -84,12 +92,15 @@ def create_sort_method(user_id):
 
 @users_blueprint.route('/add_item', methods=['GET', 'POST'])
 def add_new_item_to_database():
-    if request.method == 'POST':
-        item_name = request.form['name']
-        category = request.form['category_id']
-        price = request.form['price']
-        new_item = Item(name=item_name, category=category, price=price)
+    categories = Category.select_all_categories()
+    form = CreateItem(obj=categories) 
+    form.item_category.choices = [(c.id, c.name) for c in Category.query.order_by('name')]
+    if form.validate_on_submit():
+        new_item = Item(name=form.name.data, category=form.item_category.data, price=form.price.data)
+        # item_name = request.form['name']
+        # category = request.form['category_id']
+        # price = request.form['price']
         db.session.add(new_item)
         db.session.commit()
-    categories = Category.select_all_categories()
-    return render_template('/items/add_item.jinja', categories=categories)
+
+    return render_template('/items/add_item.jinja', categories=categories, form=form)

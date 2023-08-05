@@ -7,16 +7,27 @@
     <div class="item__section">
         <h2 class="item__section__message_subtitle">at the end life is more than just bread and butter</h2>
         <form class="user__section__form" action="{{ url_for('users.add_new_item_to_database') }}" method="post">
-            <label class="user__section__form__text" for="name">Item name</label>
-            <input class="user__input user__input--color" autocomplete="off"  required type="text" name="name" id="name">
-            <select class="select__input" id="category_id" name="category_id">
-                {% for category in categories %}
-                    <option value="{{ category.id }}" name="category" id="category">{{ category.name }}</option>
-                {% endfor %}
-            </select> 
-            <label for="price">Price</label>
-            <input class="user__input" required type="number" step="0.01" name="price" id="price" autocomplete="off">
-            <button class="create__button" type="submit">Add</button>
+            {# <label class="user__section__form__text" for="name">Item name</label> #}
+            {{ form.hidden_tag() }}
+            <p>{{ form.name.label }}</p>
+            <p>{{ form.name }}</p>
+            <br>
+            <p>{{ form.item_category.label }}</p>
+            <p>{{ form.item_category }}</p>
+            <br>
+            <p>{{ form.price.label }}</p>
+            <p>{{ form.price }}</p>
+            <br>
+            <p class="create__button">{{ form.submit() }}</p>
+            {# <input class="user__input user__input--color" autocomplete="off"  required type="text" name="name" id="name"> #}
+            {# <select class="select__input" id="category_id" name="category_id"> #}
+                {# {% for category in categories %} #}
+                    {# <option value="{{ category.id }}" name="category" id="category">{{ category.name }}</option> #}
+                {# {% endfor %} #}
+            {# </select>  #}
+            {# <label for="price">Price</label> #}
+            {# <input class="user__input" required type="number" step="0.01" name="price" id="price" autocomplete="off"> #}
+            {# <button class="create__button" type="submit">Add</button> #}
         </form>
     </div>
 </div>

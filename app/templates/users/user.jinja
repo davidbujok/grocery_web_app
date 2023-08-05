@@ -25,7 +25,7 @@
     
     <div class="user__page__section__right">
         <h4 class="user__page__section__right__text">Create a new list</h4>
-        <form class="user__page__section__right__form" action="{{ url_for('users.add_list', user_id=user.id) }}" method="POST">
+        {# <form class="user__page__section__right__form" action="{{ url_for('users.add_list', user_id=user.id) }}" method="POST">
             <div class="user__page__section__right__input">
                 <label for="name">Name</label>
                 <input class="user__input" type="text" required name="name" id="name">
@@ -35,6 +35,22 @@
                 <input class="user__input" required type="number" name="budget" id="budget">
             </div>
             <button class="create__button" type="submit">Create</button>
+        </form> #}
+        <form action="{{ url_for('users.add_list', user_id=user.id) }}" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.name.label }}<br>
+                {{ form.name(size=32) }}<br>
+                {% for error in form.name.errors %}
+                    <li>{{ error }}</li> 
+                {% endfor %} 
+            </p><br>
+            <p>
+                {{ form.budget.label }}<br>
+                {{ form.budget }}
+            </p>
+            <br>
+            <p class="create__button">{{ form.submit() }}</p>
         </form>
         <div class="user__page__section__right__delete_user">
             <p class="delete__user__form__text">Delete your account</p>

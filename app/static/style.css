@@ -135,7 +135,7 @@ body {
     padding: 5px;
 }
 
-.create__button {
+.create__button input {
     border: none;
     background-color: #E3A10F;
     color: #472907;
@@ -146,7 +146,7 @@ body {
     border-radius: 10px;
 }
 
-.select__input {
+p > input {
     background-color: #fffab6;
     border: none;
     width: 250px;
