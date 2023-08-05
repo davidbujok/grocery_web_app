@@ -1,8 +1,6 @@
 from flask_wtf import FlaskForm
-from app import db
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField, FloatField
+from wtforms import StringField, BooleanField, SubmitField, SelectField, FloatField
 from wtforms.validators import DataRequired
-from app.models.category import Category
 
 class CreateList(FlaskForm):
     name = StringField('List', validators=[DataRequired()])

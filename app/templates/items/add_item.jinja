@@ -19,6 +19,13 @@
             <p>{{ form.price }}</p>
             <br>
             <p class="create__button">{{ form.submit() }}</p>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %} 
+            {% endif %}
+            {% endwith %}
             {# <input class="user__input user__input--color" autocomplete="off"  required type="text" name="name" id="name"> #}
             {# <select class="select__input" id="category_id" name="category_id"> #}
                 {# {% for category in categories %} #}

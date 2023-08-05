@@ -7,14 +7,14 @@
     <div class="user__page__section__left">
         <div class="user__page_welcome__message__wrapper">
             <h1 class="user__page__welcome__message">It's good to see you</h1>
-            <h1 class="user__page__welcome__message user__page__welcom__message__user__name">{{ user.fullname }}</h1>
+            <h1 class="user__page__welcome__message user__page__welcom__message__user__name">{{ current_user.username }}</h1>
             <h3 class="user__page__welcome__message__subtitle">Your lists are here</h3>
         </div>
         
         <div class="user__page__section__left__list__wrapper">
-        {% for list in user_lists %}
+        {% for list in current_user.lists %}
             <div class="user__page__section__left__list">
-                <h1 class="user__page__section__list__item"><a href="{{ url_for('lists.show_list', list_id=list.id, user_id=user.id) }}">{{ list.name }}</a></h1>
+                <h1 class="user__page__section__list__item"><a href="{{ url_for('lists.show_list', list_id=list.id, user_id=current_user.id) }}">{{ list.name }}</a></h1>
                 {# <form action="{{ url_for('users.delete_list', user_id=user.id, list_id=list.id) }}" method="POST">
                 <button class="delete__button" type="submit">Delete<button>
                 </form> #}
@@ -36,7 +36,7 @@
             </div>
             <button class="create__button" type="submit">Create</button>
         </form> #}
-        <form action="{{ url_for('users.add_list', user_id=user.id) }}" method="post">
+        <form action="{{ url_for('users.add_list', user_id=current_user.id) }}" method="post">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.name.label }}<br>
@@ -54,7 +54,7 @@
         </form>
         <div class="user__page__section__right__delete_user">
             <p class="delete__user__form__text">Delete your account</p>
-            <form class="delete__user__form" action="{{ url_for('users.delete_user', user_id=user.id) }}" method="post">
+            <form class="delete__user__form" action="{{ url_for('users.delete_user', user_id=current_user.id) }}" method="post">
                 <button class="delete__button" type="submit">Delete</button>
             </form>
         </div>

@@ -1,6 +1,7 @@
 from app import db
 from flask_sqlalchemy import SQLAlchemy
 from flask import Blueprint, render_template, request, redirect, url_for
+from flask_login import login_required
 from app.models.list import List
 from app.models.item import Item
 from app.models.user_list import UserList
@@ -19,6 +20,7 @@ def lists():
 
 
 @lists_blueprint.route('/lists/<user_id>/<list_id>')
+@login_required
 def show_list(user_id, list_id): 
     items = Item.select_all_items()
     categories = Category.select_all_categories()

@@ -1,14 +1,29 @@
-from app import db
+from app import db, login
 from app.models.list import List
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(UserMixin, db.Model):
 
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    fullname = db.Column(db.String(30))
+    username = db.Column(db.String(30))
+    email = db.Column(db.String(64)) 
+    password_hash = db.Column(db.String(128))
     lists = db.relationship('List', backref='user', cascade="all, delete-orphan")
     stores = db.relationship('Store', backref='user')
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
+        
+        
 
     @classmethod
     def select_all_users(cls):
@@ -38,7 +53,7 @@ class User(db.Model):
     def select_user_by_name(cls, name):
         user = db.session.scalar(
                 db.select(cls)
-                .where(cls.fullname == name)
+                .where(cls.username == name)
                 )
         return user
 
@@ -46,3 +61,7 @@ class User(db.Model):
     def delete_user_by_id(cls, user):
         db.session.delete(user)
         db.session.commit()
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))

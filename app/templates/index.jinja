@@ -15,9 +15,21 @@
     <div class="main__section__users">
         <h2 class="main__section__users__text">Which loaf you're?</h2>
         <div class="main__section__user__list">
-        {% for user in users %}
-            <h3 class="user__list__name"><a class="user__list__name" href="{{ url_for('users.user', name=user.fullname) }}">{{ user.fullname }}</a></h3>
-        {% endfor %}
+        {# {% for user in users %}
+            <h3 class="user__list__name"><a class="user__list__name" href="{{ url_for('users.user', name=user.username) }}">{{ user.username }}</a></h3>
+        {% endfor %} #}
+        <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>{{ form.username.label }}<br>
+        {{ form.username(size=32) }}</p>
+
+        <p>{{ form.password.label }}<br>
+        {{ form.password(size=32) }}</p>
+
+        <p>{{ form.remember_me}} {{ form.remember_me.label }} </p>
+        <p>{{ form.submit }}</p>
+        </form>
+        <p>New User? <a href="{{ url_for('users.register') }}">Click to Register!</a></p>
         </div>
     </div>
 

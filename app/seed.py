@@ -205,23 +205,5 @@ def seed():
     for item in list_of_items:
         db.session.add(item) 
     
-    list_of_users = [
-    User(fullname="Gerald of Rivia"),
-    User(fullname="Solid Snake"),
-    User(fullname="Lara Croft"),
-    User(fullname="Agent 47"),
-    User(fullname="Kratos"),
-    User(fullname="Joel"),
-    User(fullname="Agent 47"),
-    User(fullname="Nathan Drake"),
-    User(fullname="Duke Nukem"),
-    User(fullname="Niko Bellic")
-    ]
-    
-    for user in list_of_users:
-        db.session.add(user)
-
-    
-
 
     db.session.commit()
