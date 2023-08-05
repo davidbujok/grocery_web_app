@@ -1,12 +1,12 @@
 from app import db
 from flask_sqlalchemy import SQLAlchemy
 from flask import Blueprint, render_template, request, redirect, url_for
-from models.list import List
-from models.item import Item
-from models.user_list import UserList
-from models.store import Store
-from models.user import User
-from models.category import Category
+from app.models.list import List
+from app.models.item import Item
+from app.models.user_list import UserList
+from app.models.store import Store
+from app.models.user import User
+from app.models.category import Category
 
 
 lists_blueprint = Blueprint('lists', __name__)

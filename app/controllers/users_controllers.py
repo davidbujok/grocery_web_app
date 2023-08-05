@@ -1,11 +1,11 @@
 from flask import Flask, Blueprint, render_template, request, redirect, url_for
 from app import db
-from models.user import User
-from models.item import Item
-from models.user_layouts import UserLayouts
-from models.category import Category
-from models.list import List 
-from models.store import Store
+from app.models.user import User
+from app.models.item import Item
+from app.models.user_layouts import UserLayouts
+from app.models.category import Category
+from app.models.list import List 
+from app.models.store import Store
 
 users_blueprint = Blueprint('users', __name__)
 

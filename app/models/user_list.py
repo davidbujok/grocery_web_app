@@ -1,6 +1,6 @@
 from app import db
-from models.list import List 
-from models.item import Item
+from app.models.list import List 
+from app.models.item import Item
 class UserList(db.Model):
     
     __tablename__ = 'user_list'
